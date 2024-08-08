@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    //code here
+    document.addEventListener('DOMContentLoaded', function(){
+        function getStatistics(sales){
+            let total  = 0;
+            let average = 0;
+            let mostSold = [];
+            let index = 0;
+            let most = {name: '',count: 0};
+            sales.forEach((s)=>{
+                s.items.forEach(i =>{
+                    total += i.price
+                    index = mostSold.findIndex(item => item.name === i.name);
+                    if(index === -1){
+                       mostSold.push({
+                           name: i.name,
+                           count: 1,
+                       })
+                    }else{
+                        mostSold[index].count++;
+                    }
+                });
+            });
+            mostSold.forEach((i) =>{
+                if(i.count >= most.count){
+                    most = {
+                        name: i.name,
+                        count: i.count,
+                    }
+                }
+            });
+            return{
+                numberOfSales: sales.length,
+                totalRevenue: total,
+                averageRevenuePerSale: total / sales.length,
+                mostSoldItem: most.name,
+            };
+        }
+
+        console.log(getStatistics([
+            {
+                items: [
+                    { name: "Grilled chicken", price: 1200 },
+                    { name: "French fries", price: 600 },
+                    { name: "Coca-Cola", price: 400 },
+                ],
+            },
+            {
+                items: [
+                    { name: "Grilled chicken", price: 1200 },
+                    { name: "Coca-Cola", price: 400 },
+                ],
+            },
+            {
+                items: [
+                    { name: "French fries", price: 600 },
+                    { name: "Coca-Cola", price: 400 },
+                ],
+            },
+        ]));
+    });
+
+</script>
+</body>
+</html>

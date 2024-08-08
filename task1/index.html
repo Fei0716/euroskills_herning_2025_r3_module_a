@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    //code here
+    document.addEventListener('DOMContentLoaded', function(){
+        function sumOfTwoLargestIntegers(number){
+            let no1, no2 = 0;
+            if(number.length < 2){
+                return 0;
+            }
+            no1 = Math.max(...number);
+            number.splice(number.findIndex(n => n === no1) , 1);
+            no2 = Math.max(...number);
+
+            return no1 + no2;
+        }
+
+        console.log(sumOfTwoLargestIntegers([1, 2, 3, 4, 5]));
+        console.log(sumOfTwoLargestIntegers([5, 5, 5, 5, 5]));
+        console.log(sumOfTwoLargestIntegers([1]));
+        console.log(sumOfTwoLargestIntegers([]));
+    });
+
+</script>
+</body>
+</html>

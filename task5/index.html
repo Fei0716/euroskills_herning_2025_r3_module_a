@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    //code here
+    document.addEventListener('DOMContentLoaded', function(){
+        function createReceipt(items){
+            let output = '';
+            let storeName = 'Dineease Restaurant';
+            storeName = storeName.padStart((storeName.length + (storeName.length/2)) , ' ');
+
+            let currentDateFormatted = new Date().toISOString().replace('T' ," ").slice(0,19);
+            currentDateFormatted = currentDateFormatted.padStart((currentDateFormatted.length + (currentDateFormatted.length/2)) , ' ');
+            let total  = 0;
+            let message = 'Thank you for your visit!';
+            items.forEach(i => total += i.price);
+            output += `${storeName}\n`;
+            output +=`${currentDateFormatted}\n\n`;
+            output += `Item${''.padStart(36 - 10, ' ')}Price\n`;
+            output += `${''.padStart(37, '_ ')}\n\n`;
+            items.forEach(i =>{
+                output += `${i.name}${i.price.toString().padStart(36-i.name.length , ' ')}\n`;
+            });
+            output += `${''.padStart(37, '_ ')}\n\n`;
+            output += `Total${total.toString().padStart(36 - 5 , ' ')}\n`;
+            output += `${''.padStart(37, '_ ')}\n\n`;
+            output += `${message.padStart(((36 - message.length) /2) + message.length  , ' ')}`
+            return output;
+        }
+
+        console.log(createReceipt([
+            { name: "Grilled chicken", price: 1200 },
+            { name: "French fries", price: 600 },
+            { name: "Coca-Cola", price: 400 },
+        ]));
+    });
+
+</script>
+</body>
+</html>
